@@ -1,0 +1,214 @@
+/* ==========================================================================
+   SIDEBAR — NEON RED & BLACK THEME
+   ========================================================================== */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100vh;
+  background-color: var(--color-bg-sidebar);
+  border-right: 1px solid rgba(255, 7, 58, 0.25);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.7), 2px 0 12px rgba(255, 7, 58, 0.08);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.25rem;
+  gap: 2rem;
+  z-index: 100;
+  overflow-y: auto;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.sidebarHead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.sidebarHead img {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  border: 1px solid var(--color-primary);
+
+}
+
+/* --- Logo / Brand --- */
+.navbar-brand {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  user-select: none;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.navbar-brand span {
+  color: var(--color-primary);
+  text-shadow: 0 0 12px rgba(255, 7, 58, 0.8), 0 0 25px rgba(255, 7, 58, 0.4);
+}
+
+/* --- Nav Links (Vertikal) --- */
+.navlinks {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.navlinks ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.navlinks ul li a,
+.navlinks ul li .navBtn {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding: 0.75rem 1.15rem;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  display: block;
+  transition: all 0.25s ease;
+}
+
+.navlinks ul li a:hover,
+.navlinks ul li .navBtn:hover {
+  background-color: var(--color-primary-muted);
+  color: var(--color-text-primary);
+  border-color: rgba(255, 7, 58, 0.35);
+  box-shadow: 0 0 12px rgba(255, 7, 58, 0.2);
+  transform: translateY(-2px);
+}
+
+.navlinks ul li a.active,
+.navlinks ul li .navBtn.active {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #d6002f 100%);
+  color: #ffffff;
+  font-weight: var(--font-weight-bold);
+  border-color: rgba(255, 7, 58, 0.9);
+  box-shadow: 0 0 20px rgba(255, 7, 58, 0.6), 0 0 35px rgba(255, 7, 58, 0.25);
+  animation: verticalEntrance 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28), verticalFloat 2.4s ease-in-out infinite 0.35s;
+}
+
+/* Animasi Masuk Vertikal */
+@keyframes verticalEntrance {
+  0% {
+    transform: translateY(7px);
+    opacity: 0.8;
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animasi Vertikal Mengambang (Floating Pulse) */
+@keyframes verticalFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* --- Auth Buttons (Vertikal, di bawah sidebar) --- */
+.authButtons {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.authButtons ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.authButtons ul li a,
+.authButtons ul li button {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  text-align: center;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Login — Neon Ghost Style */
+.authButtons ul li:first-child a,
+.authButtons ul li:first-child button {
+  color: var(--color-primary);
+  border: 1px solid rgba(255, 7, 58, 0.5);
+  background-color: rgba(255, 7, 58, 0.05);
+}
+
+.authButtons ul li:first-child a:hover,
+.authButtons ul li:first-child button:hover {
+  background-color: rgba(255, 7, 58, 0.15);
+  border-color: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 7, 58, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Register — Neon Solid Primary */
+.authButtons ul li:last-child a,
+.authButtons ul li:last-child button {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #d6002f 100%);
+  color: var(--color-text-inverse);
+  border: 1px solid rgba(255, 7, 58, 0.8);
+  box-shadow: 0 0 14px rgba(255, 7, 58, 0.4);
+}
+
+.authButtons ul li:last-child a:hover,
+.authButtons ul li:last-child button:hover {
+  box-shadow: 0 0 22px rgba(255, 7, 58, 0.7);
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+.authButtons ul li:last-child a:active,
+.authButtons ul li:last-child button:active {
+  transform: scale(0.97);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    padding: 1.5rem 0.75rem;
+    gap: 1.5rem;
+  }
+
+  .navbar-brand {
+    font-size: var(--text-xl);
+  }
+}

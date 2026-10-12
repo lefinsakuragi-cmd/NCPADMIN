@@ -1,5 +1,5 @@
 {
-  "name": "belajar-next",
+  "name": "ncpAdmin",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,12 +9,16 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/server": "^1.9.1",
+    "@supabase/supabase-js": "^2.117.3",
+    "axios": "^1.20.0",
+    "jose": "^6.2.12",
     "next": "16.4.0",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
-    "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.0"
   }

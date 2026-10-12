@@ -1,0 +1,154 @@
+/* ==========================================================================
+   HOME CONTENT — NEON RED & BLACK THEME
+   ========================================================================== */
+
+.homeContent {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+}
+
+.homeWrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3.5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* --- Headline Section --- */
+.homeHeadline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.homeHeadline h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: var(--font-weight-black);
+    color: var(--color-text-primary);
+    line-height: var(--leading-tight);
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 20px rgba(255, 7, 58, 0.3);
+}
+
+.homeHeadline p {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+.homeHeadline p span {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(255, 7, 58, 0.5);
+}
+
+/* --- Content Section (Guest / Not Logged In) --- */
+.homeContentBox {
+    background-color: var(--color-bg-card);
+    border: 1px solid rgba(255, 7, 58, 0.35);
+    border-radius: var(--radius-xl);
+    padding: 3.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.4rem;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 7, 58, 0.12), inset 0 0 30px rgba(255, 7, 58, 0.03);
+    position: relative;
+    overflow: hidden;
+}
+
+.homeContentBox::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    box-shadow: 0 0 12px var(--color-primary);
+}
+
+.homeContentBox .welcomeImage {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 7, 58, 0.45);
+    box-shadow: 0 0 25px rgba(255, 7, 58, 0.25), 0 10px 30px rgba(0, 0, 0, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.homeContentBox .welcomeImage:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 35px rgba(255, 7, 58, 0.45);
+}
+
+.homeContentBox h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-black);
+    color: var(--color-text-primary);
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 10px rgba(255, 7, 58, 0.3);
+}
+
+.homeContentBox p {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    max-width: 420px;
+    line-height: var(--leading-relaxed);
+}
+
+.homeContentBox .btn-login {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #d6002f 100%);
+    color: var(--color-text-inverse);
+    border: 1px solid rgba(255, 7, 58, 0.8);
+    border-radius: var(--radius-full);
+    padding: 0.8rem 2.5rem;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    margin-top: 0.5rem;
+    box-shadow: var(--shadow-neon-sm);
+    letter-spacing: 0.03em;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.homeContentBox .btn-login:hover {
+    box-shadow: var(--shadow-neon-md);
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+}
+
+.homeContentBox .btn-login:active {
+    transform: scale(0.97);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .homeWrapper {
+        padding: 2rem 1.25rem;
+        gap: 1.75rem;
+    }
+
+    .homeHeadline h1 {
+        font-size: var(--text-3xl);
+    }
+
+    .homeContentBox {
+        padding: 2.25rem 1.25rem;
+    }
+
+    .homeContentBox .welcomeImage {
+        width: 220px;
+        height: 220px;
+    }
+}

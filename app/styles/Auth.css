@@ -1,0 +1,240 @@
+/* ==========================================================================
+   AUTH POPUP MODAL (LOGIN & REGISTER) — NEON RED & BLACK THEME
+   ========================================================================== */
+
+/* --- Backdrop Overlay --- */
+.auth {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: rgba(3, 3, 5, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    animation: authBackdropFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Modal Card Pop-up --- */
+.authWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    background-color: #0c0c11;
+    border: 1px solid rgba(255, 7, 58, 0.45);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 0 35px rgba(255, 7, 58, 0.25), 0 25px 60px rgba(0, 0, 0, 0.95);
+    padding: 2.5rem 2rem;
+    animation: authModalScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+.authWrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    box-shadow: 0 0 15px var(--color-primary);
+}
+
+/* --- Tombol Close --- */
+.authClose {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #14141c;
+    color: var(--color-text-secondary);
+    font-size: 1.25rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.authClose:hover {
+    background-color: rgba(255, 7, 58, 0.15);
+    border-color: var(--color-primary);
+    color: #ffffff;
+    box-shadow: 0 0 12px rgba(255, 7, 58, 0.5);
+}
+
+.authClose:active {
+    transform: scale(0.92);
+}
+
+/* --- Header Section --- */
+.authHeader {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.authHeader h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-black);
+    color: var(--color-text-primary);
+    letter-spacing: 0.03em;
+    margin-bottom: 0.4rem;
+    text-shadow: 0 0 15px rgba(255, 7, 58, 0.35);
+}
+
+.authHeader p {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+}
+
+/* --- Form Section --- */
+.authForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* --- Error Alert --- */
+.authError {
+    background-color: rgba(255, 7, 58, 0.15);
+    border: 1px solid rgba(255, 7, 58, 0.45);
+    color: #ff5277;
+    font-size: var(--text-xs);
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    line-height: var(--leading-normal);
+}
+
+/* --- Input Groups --- */
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    text-align: left;
+}
+
+.formGroup label {
+    font-family: var(--font-display);
+    font-size: var(--text-2xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.formGroup input {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-input);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    padding: 0.8rem 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.formGroup input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.formGroup input:focus {
+    background-color: #161620;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 15px rgba(255, 7, 58, 0.35), inset 0 0 8px rgba(255, 7, 58, 0.05);
+}
+
+/* --- Submit Button --- */
+.authForm button[type="submit"] {
+    margin-top: 0.75rem;
+    width: 100%;
+    padding: 0.85rem 1.5rem;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #d6002f 100%);
+    color: var(--color-text-inverse);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    border: 1px solid rgba(255, 7, 58, 0.8);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    box-shadow: var(--shadow-neon-sm);
+    transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.authForm button[type="submit"]:hover {
+    box-shadow: var(--shadow-neon-md);
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+}
+
+.authForm button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+@keyframes authBackdropFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes authModalScaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.94) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 480px) {
+    .auth {
+        padding: 1rem;
+    }
+
+    .authWrapper {
+        padding: 2rem 1.25rem;
+        border-radius: var(--radius-lg);
+    }
+
+    .authHeader h1 {
+        font-size: var(--text-xl);
+    }
+
+    .authHeader p {
+        font-size: var(--text-xs);
+    }
+
+    .formGroup input {
+        padding: 0.7rem 0.85rem;
+    }
+
+    .authForm button[type="submit"] {
+        padding: 0.8rem 1.25rem;
+    }
+}
