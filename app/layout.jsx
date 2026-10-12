@@ -6,8 +6,9 @@ function RootLayout({ children }) {
     <html lang="id">
       <head>
         <meta charSet="UTF-8" />
+        <link rel="icon" href="/ncpLogo.jpeg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ini project next pertama</title>
+        <title>NewCentralAdmin</title>
       </head>
       <body>
         <AuthProvider>

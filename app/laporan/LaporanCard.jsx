@@ -29,10 +29,10 @@ function LaporanCard({ searchQuery = "" }) {
             <table>
                 <thead>
                     <tr>
-                        <th>No Q</th>
+
+                        <th>Product</th>
                         <th>Barcode</th>
                         <th>Brand</th>
-                        <th>Product</th>
                         <th>Qty</th>
                     </tr>
                 </thead>
@@ -40,10 +40,9 @@ function LaporanCard({ searchQuery = "" }) {
                     {filtered.length > 0 ? (
                         filtered.map(laporan => (
                             <tr key={laporan.id}>
-                                <td>{laporan.no_q}</td>
+                                <td>{laporan.title}</td>
                                 <td>{laporan.barcode}</td>
                                 <td>{laporan.brand}</td>
-                                <td>{laporan.title}</td>
                                 <td>{laporan.quantity}</td>
                             </tr>
                         ))
