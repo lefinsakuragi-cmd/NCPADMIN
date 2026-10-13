@@ -17,6 +17,22 @@
     gap: 2.5rem;
 }
 
+.laporanBtn {
+    text-decoration: none;
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-primary);
+    background-color: var(--color-bg-card);
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.laporanBtn:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
 /* --- Headline Section --- */
 .homeHeadline {
     display: flex;

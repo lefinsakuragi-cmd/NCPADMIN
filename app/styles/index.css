@@ -480,6 +480,10 @@ body {
     flex-direction: row;
 }
 
+.linkReset {
+    padding: 0 !important;
+}
+
 @media (max-width: 768px) {
     .page-content {
         margin-left: 200px;

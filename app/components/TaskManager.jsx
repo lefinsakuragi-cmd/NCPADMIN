@@ -139,7 +139,7 @@ function TaskManager() {
                 <div className="taskWrapper">
                     <div className="taskHeadline">
                         <div>
-                            <h1>Lah kamu siapa jir</h1>
+                            <h1>NewCentral Admin</h1>
                             <p>Kamu Belum login</p>
                         </div>
                     </div>

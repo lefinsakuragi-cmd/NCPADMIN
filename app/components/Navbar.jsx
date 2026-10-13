@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Auth from "./Auth";
 import { useAuthStore } from "@/store/userStore";
 import "../styles/Navbar.css";
+import Link from "next/link";
 
 function Navbar() {
   const router = useRouter();
@@ -68,7 +69,7 @@ function Navbar() {
             <li>
               {user ? (
                 <button type="button" onClick={logout}>
-                  Logout
+                  <Link className="linkReset" href={'/'} >Logout</Link>
                 </button>
               ) : (
                 <button type="button" onClick={() => setShowLogin(true)}>
