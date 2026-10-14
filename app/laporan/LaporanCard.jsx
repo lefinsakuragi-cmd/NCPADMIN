@@ -22,7 +22,10 @@ function LaporanCard({
         ? (laporan || []).filter(item =>
             (item.brand?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
             (item.title?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
-            (item.barcode?.toLowerCase() || "").includes(searchQuery.toLowerCase())
+            (item.barcode?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
+            (item.quantity?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
+            (item.update?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
+            (item.status?.toLowerCase() || "").includes(searchQuery.toLowerCase())
         )
         : (laporan || []);
 
@@ -113,9 +116,10 @@ function LaporanCard({
                     <tr>
                         <th>#</th>
                         <th>Barcode</th>
-                        <th>Brand</th>
                         <th>Product</th>
                         <th>Qty</th>
+                        <th>Stok Update</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -124,9 +128,10 @@ function LaporanCard({
                             <tr key={item.id || index}>
                                 <td>{index + 1}</td>
                                 <td>{item.barcode}</td>
-                                <td>{item.brand}</td>
                                 <td>{item.title}</td>
                                 <td>{item.quantity}</td>
+                                <td>{item.update}</td>
+                                <td>{item.status}</td>
                             </tr>
                         ))
                     ) : (

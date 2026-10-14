@@ -36,8 +36,8 @@ function Navbar() {
     <>
       <nav className="sidebar">
         <div className="sidebarHead">
-          <img src="/ncpLogo.jpeg" alt="logo" />
-          <h1 className="navbar-brand">NcpAdmin</h1>
+          <img src="/ncp-icon.png" alt="logo" />
+          <h1 className="navbar-brand">{user?.username.toUpperCase() || "NcpAdmin"}</h1>
         </div>
 
         <div className="navlinks">

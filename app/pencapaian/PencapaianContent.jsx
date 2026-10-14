@@ -8,12 +8,8 @@ function PencapaianContent() {
     return (
         <section className="homeContent">
             <div className="homeWrapper">
-                <div className="homeHeadline">
-                    <h1>Selamat Datang</h1>
-                    <p>NewCentral <span>Admin</span></p>
-                </div>
                 <div className="homeContentBox">
-                    <h1>INI PENCAPAIAN CONTENT</h1>
+                    <h1>On Development</h1>
                 </div>
             </div>
         </section>

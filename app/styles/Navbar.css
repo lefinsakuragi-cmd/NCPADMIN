@@ -31,7 +31,7 @@
 .sidebarHead img {
   height: 70px;
   width: 70px;
-  border-radius: 50%;
+  border-radius: 12px;
   border: 1px solid var(--color-primary);
 
 }
@@ -113,9 +113,11 @@
     transform: translateY(7px);
     opacity: 0.8;
   }
+
   60% {
     transform: translateY(-3px);
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -124,9 +126,12 @@
 
 /* Animasi Vertikal Mengambang (Floating Pulse) */
 @keyframes verticalFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-3px);
   }

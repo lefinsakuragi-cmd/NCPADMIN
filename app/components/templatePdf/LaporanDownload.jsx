@@ -34,23 +34,24 @@ export default function LaporanDownload({ data }) {
         let y = margin;
 
         // === HEADER SECTION ===
-        const logoUrl = "/ncpLogo.jpeg";
-        doc.addImage(logoUrl, "JPEG", margin, y, 25, 25);
+        const logoUrl = "/ncp-icon.png";
+        doc.setLineWidth(0)
+        doc.addImage(logoUrl, "PNG", margin, y, 20, 20);
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(16);
         doc.setTextColor(...colors.textPrimary);
         doc.text("CV. CENTRAL MAJU SEJAHTERA", margin + 25, y + 7);
 
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(15);
-        doc.setTextColor(...colors.accent);
-        doc.text(data[0]?.brand ?? "Brand tidak tersedia", margin + 25, y + 15);
+        doc.setFont("helvetica", "italic");
+        doc.setFontSize(8);
+        doc.setTextColor(...colors.textPrimary);
+        doc.text(`BRAND: ${data[0]?.brand ?? "Brand tidak tersedia"}`, margin + 25, y + 15);
 
         doc.setFont("helvetica", "normal");
         doc.setFontSize(10);
         doc.setTextColor(...colors.accent);
-        doc.text("Laporan Data Slow Moving", margin + 25, y + 20);
+        doc.text("Laporan Data Slow Moving dan overstock", margin + 25, y + 19);
 
         // Tanggal cetak
         const today = new Date();
@@ -72,8 +73,8 @@ export default function LaporanDownload({ data }) {
         y += 8;
 
         // === TABLE SECTION ===
-        const colWidths = [12, 40, 110, 20]; // No, Barcode, Product, Qty
-        const headers = ["No", "Barcode", "Product", "Qty"];
+        const colWidths = [10, 25, 105, 15, 20, 15]; // No, Barcode, Product, Qty, Update, Status
+        const headers = ["No", "Barcode", "Product", "Qty", "Update", "Status"];
         const tableWidth = colWidths.reduce((a, b) => a + b, 0);
         const tableStartX = margin;
         const rowHeight = 8;
@@ -160,6 +161,8 @@ export default function LaporanDownload({ data }) {
                     item.barcode || "-",
                     item.title || "-",
                     item.quantity != null ? String(item.quantity) : "-",
+                    item.update || "-",
+                    item.status || "-",
                 ];
 
                 rowData.forEach((text, i) => {
