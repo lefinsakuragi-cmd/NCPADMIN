@@ -73,7 +73,7 @@ export default function LaporanDownload({ data }) {
         y += 8;
 
         // === TABLE SECTION ===
-        const colWidths = [10, 25, 105, 15, 20, 15]; // No, Barcode, Product, Qty, Update, Status
+        const colWidths = [10, 25, 95, 15, 20, 25]; // No, Barcode, Product, Qty, Update, Status
         const headers = ["No", "Barcode", "Product", "Qty", "Update", "Status"];
         const tableWidth = colWidths.reduce((a, b) => a + b, 0);
         const tableStartX = margin;
@@ -215,7 +215,7 @@ export default function LaporanDownload({ data }) {
             { align: "center" }
         );
 
-        doc.save("laporan-slow-moving.pdf");
+        doc.save(`${data[0]?.brand}- ${tanggal}- laporan slow moving.pdf`);
     };
 
     return (

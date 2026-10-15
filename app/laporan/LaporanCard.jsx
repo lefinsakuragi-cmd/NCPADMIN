@@ -17,17 +17,51 @@ function LaporanCard({
     const isLoading = propIsLoading !== undefined ? propIsLoading : store.isLoading;
     const activeBrand = propActiveBrand !== undefined ? propActiveBrand : store.activeBrand;
     const error = store.error;
+    const { sortBy, sortOrder, filterDateFrom, filterDateTo, filterStatus } = store;
 
+    // 1. Filter by search query (nama/barcode/brand)
     const filtered = searchQuery.trim()
         ? (laporan || []).filter(item =>
             (item.brand?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
             (item.title?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
-            (item.barcode?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
-            (item.quantity?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
-            (item.update?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
-            (item.status?.toLowerCase() || "").includes(searchQuery.toLowerCase())
+            (item.barcode?.toLowerCase() || "").includes(searchQuery.toLowerCase())
         )
         : (laporan || []);
+
+    // 2. Filter by date range (filterDateFrom & filterDateTo)
+    const filteredByDate = filtered.filter(item => {
+        if (!filterDateFrom && !filterDateTo) return true;
+        if (!item.update) return false;
+        // Normalize: ambil 10 karakter pertama "YYYY-MM-DD" agar bisa dibandingkan string
+        const itemDate = item.update.toString().slice(0, 10);
+        if (filterDateFrom && itemDate < filterDateFrom) return false;
+        if (filterDateTo && itemDate > filterDateTo) return false;
+        return true;
+    });
+
+    // 3. Filter by status
+    const filteredByStatus = filterStatus
+        ? filteredByDate.filter(item =>
+            (item.status?.trim() || '') === filterStatus
+        )
+        : filteredByDate;
+
+    // 4. Sort logic
+    const sorted = [...filteredByStatus].sort((a, b) => {
+        if (sortBy === 'date') {
+            const dateA = a.update ? new Date(a.update) : new Date(0);
+            const dateB = b.update ? new Date(b.update) : new Date(0);
+            return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+        }
+        if (sortBy === 'status') {
+            const statusA = (a.status || '').toLowerCase();
+            const statusB = (b.status || '').toLowerCase();
+            if (statusA < statusB) return sortOrder === 'asc' ? -1 : 1;
+            if (statusA > statusB) return sortOrder === 'asc' ? 1 : -1;
+            return 0;
+        }
+        return 0; // default: urutan asli
+    });
 
     // 1. Initial Standby State: Jangan langsung render tabel sebelum brand dipilih dan tombol diklik
     if (!hasFetched && !isLoading) {
@@ -100,7 +134,7 @@ function LaporanCard({
                         BRAND: {activeBrand === "ALL" ? "SEMUA BRAND" : activeBrand}
                     </span>
                     <span className="laporanCardCount">
-                        {filtered.length} {filtered.length === 1 ? "Item" : "Items"}
+                        {sorted.length} {sorted.length === 1 ? "Item" : "Items"}
                     </span>
                 </div>
                 {searchQuery && (
@@ -108,7 +142,7 @@ function LaporanCard({
                         Filter: <span>"{searchQuery}"</span>
                     </div>
                 )}
-                <LaporanDownload data={filtered} />
+                <LaporanDownload data={sorted} />
             </div>
 
             <table>
@@ -123,8 +157,8 @@ function LaporanCard({
                     </tr>
                 </thead>
                 <tbody>
-                    {filtered.length > 0 ? (
-                        filtered.map((item, index) => (
+                    {sorted.length > 0 ? (
+                        sorted.map((item, index) => (
                             <tr key={item.id || index}>
                                 <td>{index + 1}</td>
                                 <td>{item.barcode}</td>

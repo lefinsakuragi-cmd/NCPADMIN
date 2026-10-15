@@ -407,6 +407,215 @@
 }
 
 /* ==========================================================================
+   SORT CONTROLS
+   ========================================================================== */
+
+.laporanSortGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+}
+
+.laporanSortGroup>label {
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.laporanSortSubLabel {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+}
+
+.laporanSortOrderGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.laporanSortOrderBtns {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.laporanSortOrderBtn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.55rem 0.5rem;
+    background: var(--color-bg-input);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.laporanSortOrderBtn svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+}
+
+.laporanSortOrderBtn:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    color: var(--color-text-primary);
+    box-shadow: 0 0 10px rgba(255, 7, 58, 0.2);
+}
+
+.laporanSortOrderBtn.active {
+    background: rgba(255, 7, 58, 0.12);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    box-shadow: 0 0 12px rgba(255, 7, 58, 0.3);
+}
+
+.laporanSortOrderBtn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   FILTER PANEL — Tanggal Update & Status
+   ========================================================================== */
+
+.laporanFilterPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+}
+
+.laporanFilterPanelHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.laporanFilterPanelTitle {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.laporanFilterPanelTitle svg {
+    width: 13px;
+    height: 13px;
+    color: var(--color-primary);
+    filter: drop-shadow(0 0 4px var(--color-primary));
+}
+
+.laporanFilterResetBtn {
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-primary);
+    background: rgba(255, 7, 58, 0.08);
+    border: 1px solid rgba(255, 7, 58, 0.3);
+    border-radius: var(--radius-full);
+    padding: 0.2rem 0.65rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.laporanFilterResetBtn:hover {
+    background: rgba(255, 7, 58, 0.2);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px rgba(255, 7, 58, 0.25);
+}
+
+.laporanFilterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.laporanDateRange {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.laporanDateField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+}
+
+.laporanDateLabel {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.laporanDateSep {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    padding-bottom: 0.6rem;
+    flex-shrink: 0;
+}
+
+.laporanDateInput {
+    width: 100%;
+    padding: 0.6rem 0.6rem;
+    background-color: var(--color-bg-input);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    color: var(--color-text-primary);
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    color-scheme: dark;
+}
+
+.laporanDateInput:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 12px rgba(255, 7, 58, 0.3);
+}
+
+.laporanDateInput:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+
+
+/* ==========================================================================
    LAPORAN CONTROL PANEL & SELECT DROPDOWN
    ========================================================================== */
 

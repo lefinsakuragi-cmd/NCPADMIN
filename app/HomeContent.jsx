@@ -43,7 +43,7 @@ function HomeContent() {
           </div>
           <div className="homeContentBox">
             <img className="welcomeImage" src="/ncpLogo.jpeg" alt="Login Required" />
-            <h1>selamat data di newcentral admin - dashboard laporan</h1>
+            <h1>selamat datang di newcentral admin - dashboard laporan</h1>
             <p>mau cek barang slow moving?? disini yah</p>
             <Link className="laporanBtn" href={'/laporan'}>ke halaman laporan</Link>
           </div>

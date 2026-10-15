@@ -17,7 +17,23 @@ function LaporanSidebar({ onSearch, onFetch }) {
         hasFetched,
         setHasFetched,
         setError,
+        sortBy,
+        setSortBy,
+        sortOrder,
+        setSortOrder,
+        filterDateFrom,
+        setFilterDateFrom,
+        filterDateTo,
+        setFilterDateTo,
+        filterStatus,
+        setFilterStatus,
+        resetFilters,
     } = useLaporanStore();
+
+    // Derive unique status options from loaded data
+    const statusOptions = Array.from(
+        new Set((laporan || []).map((item) => item.status?.trim()).filter(Boolean))
+    ).sort();
 
     const [selectedBrand, setSelectedBrand] = useState(storeBrand || '');
     const [brandOptions, setBrandOptions] = useState([]);
@@ -97,6 +113,10 @@ function LaporanSidebar({ onSearch, onFetch }) {
         }
     };
 
+    const handleResetFilters = () => {
+        resetFilters();
+    };
+
     return (
         <aside className="laporanSidebar">
             <div className="laporanSidebarWrapper">
@@ -144,8 +164,8 @@ function LaporanSidebar({ onSearch, onFetch }) {
                             <p className="laporanFieldHint">Memuat opsi brand dari database...</p>
                         ) : (
                             <p className="laporanFieldHint">
-                                {brandOptions.length > 0 
-                                    ? `Tersedia ${brandOptions.length} brand terdaftar.` 
+                                {brandOptions.length > 0
+                                    ? `Tersedia ${brandOptions.length} brand terdaftar.`
                                     : "Pilih opsi di atas untuk memuat data."}
                             </p>
                         )}
@@ -193,13 +213,13 @@ function LaporanSidebar({ onSearch, onFetch }) {
                     <div className="laporanSearchGroup">
                         <label htmlFor="brandSearch">Filter Pencarian :</label>
                         <div className="laporanInputWrapper">
-                            <svg 
-                                className="laporanSearchIcon" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                strokeWidth="2" 
-                                strokeLinecap="round" 
+                            <svg
+                                className="laporanSearchIcon"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
                                 strokeLinejoin="round"
                             >
                                 <circle cx="11" cy="11" r="8"></circle>
@@ -229,9 +249,171 @@ function LaporanSidebar({ onSearch, onFetch }) {
                             )}
                         </div>
                         <p className="laporanSearchHint">
-                            {hasFetched 
-                                ? "Ketik untuk menyaring produk atau barcode yang sedang ditampilkan." 
+                            {hasFetched
+                                ? "Ketik untuk menyaring produk atau barcode yang sedang ditampilkan."
                                 : "Filter pencarian aktif setelah laporan ditampilkan."}
+                        </p>
+                    </div>
+
+                    {/* Sort Controls */}
+                    <div className="laporanSortGroup">
+                        <label>Urutkan Data :</label>
+
+                        {/* Sort By */}
+                        <div className="laporanControlGroup" style={{ marginBottom: '10px' }}>
+                            <label htmlFor="sortBySelect" className="laporanSortSubLabel">Berdasarkan</label>
+                            <div className="laporanSelectWrapper">
+                                <select
+                                    id="sortBySelect"
+                                    className="laporanSelect"
+                                    value={sortBy}
+                                    onChange={(e) => setSortBy(e.target.value)}
+                                    disabled={!hasFetched}
+                                >
+                                    <option value="default">Default (Tanpa Urutan)</option>
+                                    <option value="date">Tanggal Update</option>
+                                    <option value="status">Status</option>
+                                </select>
+                                <div className="laporanSelectArrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Sort Order — hanya tampil jika sortBy bukan default */}
+                        {sortBy !== 'default' && (
+                            <div className="laporanSortOrderGroup">
+                                <label className="laporanSortSubLabel">Arah Urutan</label>
+                                <div className="laporanSortOrderBtns">
+                                    <button
+                                        type="button"
+                                        id="sortOrderAsc"
+                                        className={`laporanSortOrderBtn ${sortOrder === 'asc' ? 'active' : ''}`}
+                                        onClick={() => setSortOrder('asc')}
+                                        disabled={!hasFetched}
+                                        title={sortBy === 'date' ? 'Terlama → Terbaru' : 'A → Z'}
+                                    >
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <line x1="12" y1="19" x2="12" y2="5"></line>
+                                            <polyline points="5 12 12 5 19 12"></polyline>
+                                        </svg>
+                                        <span>{sortBy === 'date' ? 'Terlama' : 'A → Z'}</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        id="sortOrderDesc"
+                                        className={`laporanSortOrderBtn ${sortOrder === 'desc' ? 'active' : ''}`}
+                                        onClick={() => setSortOrder('desc')}
+                                        disabled={!hasFetched}
+                                        title={sortBy === 'date' ? 'Terbaru → Terlama' : 'Z → A'}
+                                    >
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                                            <polyline points="19 12 12 19 5 12"></polyline>
+                                        </svg>
+                                        <span>{sortBy === 'date' ? 'Terbaru' : 'Z → A'}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
+                        <p className="laporanSearchHint">
+                            {!hasFetched
+                                ? "Sorting aktif setelah laporan ditampilkan."
+                                : sortBy === 'default'
+                                    ? "Pilih kriteria pengurutan di atas."
+                                    : `Diurutkan: ${sortBy === 'date' ? 'Tanggal Update' : 'Status'} (${sortOrder === 'asc' ? (sortBy === 'date' ? 'Terlama' : 'A→Z') : (sortBy === 'date' ? 'Terbaru' : 'Z→A')})`
+                            }
+                        </p>
+                    </div>
+
+                    {/* Filter Panel — Tanggal Update & Status */}
+                    <div className="laporanFilterPanel">
+                        <div className="laporanFilterPanelHeader">
+                            <div className="laporanFilterPanelTitle">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                </svg>
+                                <span>Filter Tampilan</span>
+                            </div>
+                            {(filterDateFrom || filterDateTo || filterStatus) && (
+                                <button
+                                    type="button"
+                                    className="laporanFilterResetBtn"
+                                    onClick={handleResetFilters}
+                                    title="Reset semua filter"
+                                >
+                                    Reset
+                                </button>
+                            )}
+                        </div>
+
+                        {/* Filter Tanggal Update */}
+                        <div className="laporanFilterGroup">
+                            <label className="laporanSortSubLabel">Tanggal Update</label>
+                            <div className="laporanDateRange">
+                                <div className="laporanDateField">
+                                    <label htmlFor="filterDateFrom" className="laporanDateLabel">Dari</label>
+                                    <input
+                                        type="date"
+                                        id="filterDateFrom"
+                                        className="laporanDateInput"
+                                        value={filterDateFrom}
+                                        onChange={(e) => setFilterDateFrom(e.target.value)}
+                                        disabled={!hasFetched}
+                                    />
+                                </div>
+                                <div className="laporanDateSep"></div>
+                                <div className="laporanDateField">
+                                    <label htmlFor="filterDateTo" className="laporanDateLabel">Sampai</label>
+                                    <input
+                                        type="date"
+                                        id="filterDateTo"
+                                        className="laporanDateInput"
+                                        value={filterDateTo}
+                                        onChange={(e) => setFilterDateTo(e.target.value)}
+                                        disabled={!hasFetched}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Filter Status */}
+                        <div className="laporanFilterGroup">
+                            <label htmlFor="filterStatusSelect" className="laporanSortSubLabel">Status Produk</label>
+                            <div className="laporanSelectWrapper">
+                                <select
+                                    id="filterStatusSelect"
+                                    className="laporanSelect"
+                                    value={filterStatus}
+                                    onChange={(e) => setFilterStatus(e.target.value)}
+                                    disabled={!hasFetched}
+                                >
+                                    <option value="">Semua Status</option>
+                                    {statusOptions.map((s) => (
+                                        <option key={s} value={s}>{s}</option>
+                                    ))}
+                                </select>
+                                <div className="laporanSelectArrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p className="laporanSearchHint">
+                            {!hasFetched
+                                ? "Filter aktif setelah laporan ditampilkan."
+                                : (!filterDateFrom && !filterDateTo && !filterStatus)
+                                    ? "Belum ada filter aktif. Semua data ditampilkan."
+                                    : [
+                                        filterStatus && `Status: ${filterStatus}`,
+                                        (filterDateFrom || filterDateTo) && `Tanggal: ${filterDateFrom || '...'} → ${filterDateTo || '...'}`,
+                                    ].filter(Boolean).join(' · ')
+                            }
                         </p>
                     </div>
                 </div>
