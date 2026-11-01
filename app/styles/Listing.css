@@ -1,0 +1,415 @@
+/* ==========================================================================
+   LISTING SIDEBAR — NEON RED & BLACK THEME
+   ========================================================================== */
+
+aside.listingSidebar {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    width: 320px;
+    min-width: 300px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background-color: var(--color-bg-sidebar);
+    border-left: 1px solid rgba(255, 7, 58, 0.25);
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.7), -2px 0 12px rgba(255, 7, 58, 0.08);
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    gap: 1.5rem;
+    z-index: 10;
+}
+
+aside.listingSidebar h1 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    text-shadow: 0 0 12px rgba(255, 7, 58, 0.4);
+    letter-spacing: -0.02em;
+}
+
+aside.listingSidebar form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+aside.listingSidebar label {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+aside.listingSidebar input[type="text"],
+aside.listingSidebar input[type="tel"],
+aside.listingSidebar input[type="date"],
+aside.listingSidebar select {
+    background-color: var(--color-bg-card);
+    border: 1px solid rgba(255, 7, 58, 0.3);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    color: var(--color-text-primary);
+    font-size: var(--text-sm);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+aside.listingSidebar input[type="text"]:focus,
+aside.listingSidebar select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px rgba(255, 7, 58, 0.3);
+}
+
+aside.listingSidebar button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-weight: var(--font-weight-semibold);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 14px rgba(255, 7, 58, 0.3);
+}
+
+aside.listingSidebar button:hover {
+    background-color: var(--color-primary-hover);
+    box-shadow: 0 0 20px rgba(255, 7, 58, 0.6);
+}
+
+aside.listingSidebar .item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+aside.listingSidebar .item>div {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 7, 58, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.75rem;
+    color: var(--color-text-primary);
+    font-size: var(--text-sm);
+}
+
+/* Custom Scrollbar */
+aside.listingSidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+aside.listingSidebar::-webkit-scrollbar-track {
+    background: var(--color-bg-app);
+}
+
+aside.listingSidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 7, 58, 0.3);
+    border-radius: 4px;
+}
+
+.listingHeader {
+    margin-bottom: 1rem;
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: black;
+}
+
+.listing-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    color: #333333;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Header Surat */
+.listing-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.listing-header-text h1 {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: left;
+    margin: 0;
+    color: red;
+    font-family: calibri, sans-serif;
+    text-shadow: none;
+}
+
+
+.listing-logo {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+}
+
+.listing-header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.company-unit {
+    font-size: 20px;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.company-address,
+.company-contact {
+    font-size: 12px;
+    color: #555555;
+    margin: 2px 0;
+}
+
+/* Judul Surat */
+.listing-title-area {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.listing-title-area h2 {
+    font-size: 18px;
+    text-decoration: underline;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.listing-date {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+}
+
+/* Bagian Pihak Terkait */
+.parties-section {
+    margin-bottom: 25px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.party-box {
+    margin-bottom: 12px;
+}
+
+.party-box table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.party-box td {
+    padding: 2px 0;
+    vertical-align: top;
+}
+
+.party-box td:first-child {
+    width: 110px;
+    font-weight: 600;
+}
+
+/* Ketentuan & Tabel */
+.terms-section {
+    margin-bottom: 25px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.terms-section ol {
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
+.terms-section li {
+    margin-bottom: 6px;
+}
+
+.bank-info {
+    margin-top: 8px;
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+    border-left: 3px solid #2c3e50;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.product-table th,
+.product-table td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.product-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+/* Kalkulasi Biaya */
+.summary-box {
+    background-color: #fdfdfd;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    font-size: 13px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.summary-row.total {
+    border-bottom: none;
+    border-top: 2px solid #2c3e50;
+    margin-top: 5px;
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    color: #2c3e50;
+}
+
+/* Penutup & Tanda Tangan */
+.closing-text {
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-align: justify;
+}
+
+.signatures-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 14px;
+    page-break-inside: avoid;
+}
+
+.signature-box {
+    width: 45%;
+    text-align: center;
+}
+
+.signature-role {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.signature-name {
+    margin-top: 70px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.signature-title {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    aside.listingSidebar {
+        width: 100%;
+        min-width: unset;
+        height: auto;
+        position: static;
+        border-left: none;
+        border-top: 1px solid rgba(255, 7, 58, 0.25);
+    }
+}
+
+/* Tombol Print */
+.btn-print {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    width: 100%;
+    background: transparent;
+    color: var(--color-primary, #ff073a);
+    border: 1px solid rgba(255, 7, 58, 0.5);
+    border-radius: var(--radius-md, 6px);
+    padding: 0.6rem 1rem;
+    font-size: var(--text-sm, 13px);
+    font-weight: var(--font-weight-semibold, 600);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: none;
+}
+
+.btn-print:hover {
+    background-color: rgba(255, 7, 58, 0.1);
+    border-color: var(--color-primary, #ff073a);
+    box-shadow: 0 0 14px rgba(255, 7, 58, 0.25);
+}
+
+/* ==========================================================================
+   PRINT STYLES — hanya tampilkan .listing-container
+   ========================================================================== */
+@media print {
+
+    /* Sembunyikan navbar, sidebar, dan wrapper layout */
+    nav,
+    header,
+    aside.listingSidebar,
+    .page-content>aside,
+    #btn-print-listing {
+        display: none !important;
+    }
+
+    /* Buat layout tidak menghalangi */
+    body,
+    html,
+    main.app-layout,
+    .page-content {
+        display: block !important;
+        background: #fff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Tampilkan hanya .listing-container */
+    .listing-container {
+        display: block !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 20px !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        color: #000 !important;
+        background: #fff !important;
+    }
+
+    /* Jaga agar tanda tangan tidak terpotong antar halaman */
+    .signatures-section {
+        page-break-inside: avoid;
+    }
+}

@@ -36,8 +36,10 @@ function Navbar() {
     <>
       <nav className="sidebar">
         <div className="sidebarHead">
-          <img src="/ncp-icon.png" alt="logo" />
-          <h1 className="navbar-brand">{user?.username.toUpperCase() || "NcpAdmin"}</h1>
+          <img src="/ncpLogo.png" alt="logo" />
+          <h1 className="navbar-brand">
+            {user?.username.toUpperCase() || "NcpAdmin"}
+          </h1>
         </div>
 
         <div className="navlinks">
@@ -69,7 +71,9 @@ function Navbar() {
             <li>
               {user ? (
                 <button type="button" onClick={logout}>
-                  <Link className="linkReset" href={'/'} >Logout</Link>
+                  <Link className="linkReset" href={"/"}>
+                    Logout
+                  </Link>
                 </button>
               ) : (
                 <button type="button" onClick={() => setShowLogin(true)}>
@@ -81,9 +85,7 @@ function Navbar() {
         </div>
       </nav>
 
-      {!user && showLogin && (
-        <Auth onClose={() => setShowLogin(false)} />
-      )}
+      {!user && showLogin && <Auth onClose={() => setShowLogin(false)} />}
     </>
   );
 }

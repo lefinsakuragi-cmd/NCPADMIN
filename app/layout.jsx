@@ -6,7 +6,7 @@ function RootLayout({ children }) {
     <html lang="id">
       <head>
         <meta charSet="UTF-8" />
-        <link rel="icon" href="/ncpLogo.jpeg" />
+        <link rel="icon" href="/ncpLogo.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>NewCentralAdmin</title>
       </head>
