@@ -478,6 +478,12 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: row;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar.hidden ~ .page-content,
+.app-layout:has(.sidebar.hidden) .page-content {
+    margin-left: 0;
 }
 
 .linkReset {
@@ -488,5 +494,10 @@ body {
     .page-content {
         margin-left: 200px;
         flex-direction: column;
+    }
+
+    .sidebar.hidden ~ .page-content,
+    .app-layout:has(.sidebar.hidden) .page-content {
+        margin-left: 0;
     }
 }

@@ -139,46 +139,48 @@ function LaporanCard({
                 </div>
                 {searchQuery && (
                     <div className="laporanFilterNotice">
-                        Filter: <span>"{searchQuery}"</span>
+                        Filter: <span>&quot;{searchQuery}&quot;</span>
                     </div>
                 )}
                 <LaporanDownload data={sorted} />
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Barcode</th>
-                        <th>Product</th>
-                        <th>Qty</th>
-                        <th>Stok Update</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {sorted.length > 0 ? (
-                        sorted.map((item, index) => (
-                            <tr key={item.id || index}>
-                                <td>{index + 1}</td>
-                                <td>{item.barcode}</td>
-                                <td>{item.title}</td>
-                                <td>{item.quantity}</td>
-                                <td>{item.update}</td>
-                                <td>{item.status}</td>
-                            </tr>
-                        ))
-                    ) : (
+            <div className="laporanTableWrapper">
+                <table>
+                    <thead>
                         <tr>
-                            <td colSpan="5" className="laporan-empty-cell">
-                                {searchQuery
-                                    ? `Data tidak ditemukan untuk pencarian "${searchQuery}"`
-                                    : "Data brand tidak ditemukan"}
-                            </td>
+                            <th>#</th>
+                            <th>Barcode</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Stok Update</th>
+                            <th>Status</th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {sorted.length > 0 ? (
+                            sorted.map((item, index) => (
+                                <tr key={item.id || index}>
+                                    <td>{index + 1}</td>
+                                    <td>{item.barcode}</td>
+                                    <td>{item.title}</td>
+                                    <td>{item.quantity}</td>
+                                    <td>{item.update}</td>
+                                    <td>{item.status}</td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="6" className="laporan-empty-cell">
+                                    {searchQuery
+                                        ? `Data tidak ditemukan untuk pencarian "${searchQuery}"`
+                                        : "Data brand tidak ditemukan"}
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

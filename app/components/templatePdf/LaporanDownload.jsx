@@ -34,7 +34,7 @@ export default function LaporanDownload({ data }) {
         let y = margin;
 
         // === HEADER SECTION ===
-        const logoUrl = "/ncp-icon.png";
+        const logoUrl = "/ncpLogo.png";
         doc.setLineWidth(0)
         doc.addImage(logoUrl, "PNG", margin, y, 20, 20);
 

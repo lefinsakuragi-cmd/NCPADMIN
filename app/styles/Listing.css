@@ -345,23 +345,30 @@ aside.listingSidebar::-webkit-scrollbar-thumb {
     }
 }
 
-/* Tombol Print */
+/* Tombol Print & Save PDF */
+.listingBtnGroup {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+
 .btn-print {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
-    width: 100%;
+    flex: 1;
     background: transparent;
     color: var(--color-primary, #ff073a);
     border: 1px solid rgba(255, 7, 58, 0.5);
     border-radius: var(--radius-md, 6px);
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 0.75rem;
     font-size: var(--text-sm, 13px);
     font-weight: var(--font-weight-semibold, 600);
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: none;
+    white-space: nowrap;
 }
 
 .btn-print:hover {
@@ -370,16 +377,44 @@ aside.listingSidebar::-webkit-scrollbar-thumb {
     box-shadow: 0 0 14px rgba(255, 7, 58, 0.25);
 }
 
+.btn-save-pdf {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #d6002f 100%);
+    color: #ffffff;
+    border-color: rgba(255, 7, 58, 0.8);
+    box-shadow: 0 0 12px rgba(255, 7, 58, 0.35);
+}
+
+.btn-save-pdf:hover {
+    background: linear-gradient(135deg, var(--color-primary-hover) 0%, #e60033 100%);
+    box-shadow: 0 0 18px rgba(255, 7, 58, 0.6);
+    color: #ffffff;
+}
+
+.btn-save-pdf:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+}
+
 /* ==========================================================================
    PRINT STYLES — hanya tampilkan .listing-container
    ========================================================================== */
+@page {
+    size: A4 portrait;
+    margin: 12mm 15mm;
+}
+
 @media print {
 
-    /* Sembunyikan navbar, sidebar, dan wrapper layout */
+    /* Sembunyikan navbar, sidebar, tombol, dan wrapper layout */
     nav,
     header,
     aside.listingSidebar,
     .page-content>aside,
+    .btn-print,
+    .listingBtnGroup,
+    .sidebarOpenBtn,
+    .sidebarCloseBtn,
     #btn-print-listing {
         display: none !important;
     }
@@ -393,6 +428,7 @@ aside.listingSidebar::-webkit-scrollbar-thumb {
         background: #fff !important;
         padding: 0 !important;
         margin: 0 !important;
+        width: 100% !important;
     }
 
     /* Tampilkan hanya .listing-container */
@@ -400,7 +436,7 @@ aside.listingSidebar::-webkit-scrollbar-thumb {
         display: block !important;
         max-width: 100% !important;
         margin: 0 !important;
-        padding: 20px !important;
+        padding: 0 !important;
         box-shadow: none !important;
         border: none !important;
         border-radius: 0 !important;
@@ -408,7 +444,10 @@ aside.listingSidebar::-webkit-scrollbar-thumb {
         background: #fff !important;
     }
 
-    /* Jaga agar tanda tangan tidak terpotong antar halaman */
+    /* Jaga agar baris dan tanda tangan tidak terpotong antar halaman */
+    .product-table tr,
+    .summary-box,
+    .parties-section,
     .signatures-section {
         page-break-inside: avoid;
     }

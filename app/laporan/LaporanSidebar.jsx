@@ -491,12 +491,12 @@ function LaporanSidebar({ onSearch, onFetch }) {
                 : !filterDateFrom && !filterDateTo && !filterStatus
                   ? "Belum ada filter aktif. Semua data ditampilkan."
                   : [
-                      filterStatus && `Status: ${filterStatus}`,
-                      (filterDateFrom || filterDateTo) &&
-                        `Tanggal: ${filterDateFrom || "..."} → ${filterDateTo || "..."}`,
-                    ]
-                      .filter(Boolean)
-                      .join(" · ")}
+                    filterStatus && `Status: ${filterStatus}`,
+                    (filterDateFrom || filterDateTo) &&
+                    `Tanggal: ${filterDateFrom || "..."} → ${filterDateTo || "..."}`,
+                  ]
+                    .filter(Boolean)
+                    .join(" · ")}
             </p>
           </div>
         </div>
