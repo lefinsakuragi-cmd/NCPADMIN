@@ -18,9 +18,9 @@ function Navbar() {
   const menuItems = [
     "Menu",
     ...(user?.role === "admin"
-      ? ["Listing", "Laporan", "Pencapaian", "JBP"]
+      ? ["Listing", "Laporan", "Pencapaian", "JBP", "Noted"]
       : user
-        ? ["Laporan"]
+        ? ["Laporan", "Noted"]
         : []),
   ];
 
