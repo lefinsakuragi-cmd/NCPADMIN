@@ -481,6 +481,7 @@ aside.notedSidebar {
 }
 
 .notedFormGroup input[type="text"],
+.notedFormGroup input[type="date"],
 .notedFormGroup textarea {
     width: 100%;
     background-color: var(--color-bg-card);

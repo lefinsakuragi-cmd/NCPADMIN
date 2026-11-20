@@ -20,6 +20,9 @@ function NotedSidebar() {
     const [type, setType] = useState("")
     const [syarat, setSyarat] = useState("")
     const [reward, setReward] = useState("")
+    const [brand, setBrand] = useState("")
+    const [perusahaan, setPerusahaan] = useState("")
+    const [berlakuSampai, setBerlakuSampai] = useState("")
     const [isSaving, setIsSaving] = useState(false)
 
     const handleTagClick = (tag) => {
@@ -36,6 +39,9 @@ function NotedSidebar() {
         setType("")
         setSyarat("")
         setReward("")
+        setBrand("")
+        setPerusahaan("")
+        setBerlakuSampai("")
     }
 
     const handleSubmit = async (e) => {
@@ -51,6 +57,9 @@ function NotedSidebar() {
                 type: type.trim() || null,
                 syarat: syarat.trim() || null,
                 reward: reward.trim() || null,
+                brand: brand.trim() || null,
+                company: perusahaan.trim() || null,
+                expired: berlakuSampai || null,
             }
 
             const res = await axios.post("/api/noted", payload)
@@ -250,6 +259,36 @@ function NotedSidebar() {
                             placeholder="Reward"
                             value={reward}
                             onChange={(e) => setReward(e.target.value)}
+                        />
+                    </div>
+                    <div className="notedFormGroup">
+                        <label htmlFor="brand">Brand</label>
+                        <input
+                            id="brand"
+                            type="text"
+                            placeholder="Brand"
+                            value={brand}
+                            onChange={(e) => setBrand(e.target.value)}
+                        />
+                    </div>
+                    <div className="notedFormGroup">
+                        <label htmlFor="perusahaan">Perusahaan</label>
+                        <input
+                            id="perusahaan"
+                            type="text"
+                            placeholder="Perusahaan"
+                            value={perusahaan}
+                            onChange={(e) => setPerusahaan(e.target.value)}
+                        />
+                    </div>
+                    <div className="notedFormGroup">
+                        <label htmlFor="berlakuSampai">Berlaku Sampai</label>
+                        <input
+                            id="berlakuSampai"
+                            type="date"
+                            placeholder="Berlaku Sampai"
+                            value={berlakuSampai}
+                            onChange={(e) => setBerlakuSampai(e.target.value)}
                         />
                     </div>
 

@@ -1,11 +1,10 @@
 "use client"
 
-import { useEffect, useCallback } from "react"
+import { useEffect, useMemo } from "react"
 import { useAuthStore } from "@/store/userStore"
 import { useNotedStore } from "@/store/NotedStore"
 import NotedEditFocus from "./NotedEditFocus"
 import NotLogin from "../NotLogin"
-import axios from "axios"
 import "../styles/Noted.css"
 import "../styles/HomeContent.css"
 
@@ -21,39 +20,61 @@ function getTagColor(type) {
     return TAG_COLOR_MAP[type.toLowerCase()] || "tag-blue"
 }
 
+function formatDate(value) {
+    if (!value) return ""
+    const date = new Date(value)
+    if (Number.isNaN(date.getTime())) return String(value)
+    return date.toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+    })
+}
+
 function NotedContent() {
     const user = useAuthStore((state) => state.user)
     const noted = useNotedStore((state) => state.noted)
-    const setNoted = useNotedStore((state) => state.setNoted)
+    const fetchNoted = useNotedStore((state) => state.fetchNoted)
     const editTarget = useNotedStore((state) => state.editTarget)
     const setEditTarget = useNotedStore((state) => state.setEditTarget)
-    const getFiltered = useNotedStore((state) => state.getFiltered)
-
     const searchQuery = useNotedStore((state) => state.searchQuery)
     const filterType = useNotedStore((state) => state.filterType)
-
-    const fetchNoted = useCallback(async () => {
-        try {
-            const res = await axios.get("/api/noted")
-            const data = res.data?.data
-            if (Array.isArray(data)) {
-                setNoted(data)
-            }
-        } catch (err) {
-            console.error("Gagal mengambil data catatan:", err)
-        }
-    }, [setNoted])
 
     useEffect(() => {
         if (!user) return
         fetchNoted()
     }, [user, fetchNoted])
 
+    const filtered = useMemo(() => {
+        let result = Array.isArray(noted) ? noted : []
+
+        if (filterType) {
+            result = result.filter(
+                (n) => n.type && n.type.toLowerCase() === filterType.toLowerCase()
+            )
+        }
+
+        if (searchQuery && searchQuery.trim()) {
+            const q = searchQuery.toLowerCase().trim()
+            result = result.filter(
+                (n) =>
+                    (n.title && n.title.toLowerCase().includes(q)) ||
+                    (n.deskription && n.deskription.toLowerCase().includes(q)) ||
+                    (n.type && n.type.toLowerCase().includes(q)) ||
+                    (n.syarat && n.syarat.toLowerCase().includes(q)) ||
+                    (n.reward && n.reward.toLowerCase().includes(q)) ||
+                    (n.brand && n.brand.toLowerCase().includes(q)) ||
+                    (n.company && n.company.toLowerCase().includes(q)) ||
+                    (n.expired && String(n.expired).toLowerCase().includes(q))
+            )
+        }
+
+        return result
+    }, [noted, searchQuery, filterType])
+
     if (!user) {
         return <NotLogin />
     }
-
-    const filtered = getFiltered()
 
     return (
         <>
@@ -94,8 +115,8 @@ function NotedContent() {
                                     )}
                                 </div>
 
-                                {item.description && (
-                                    <p className="notedCardDesc">{item.description}</p>
+                                {item.deskription && (
+                                    <p className="notedCardDesc">{item.deskription}</p>
                                 )}
 
                                 <div className="notedCardMeta">
@@ -109,6 +130,24 @@ function NotedContent() {
                                         <div className="notedCardMetaItem">
                                             <span className="notedMetaLabel">Reward</span>
                                             <span className="notedMetaValue">{item.reward}</span>
+                                        </div>
+                                    )}
+                                    {item.brand && (
+                                        <div className="notedCardMetaItem">
+                                            <span className="notedMetaLabel">Brand</span>
+                                            <span className="notedMetaValue">{item.brand}</span>
+                                        </div>
+                                    )}
+                                    {item.company && (
+                                        <div className="notedCardMetaItem">
+                                            <span className="notedMetaLabel">Perusahaan</span>
+                                            <span className="notedMetaValue">{item.company}</span>
+                                        </div>
+                                    )}
+                                    {item.expired && (
+                                        <div className="notedCardMetaItem">
+                                            <span className="notedMetaLabel">Berlaku</span>
+                                            <span className="notedMetaValue">{formatDate(item.expired)}</span>
                                         </div>
                                     )}
                                 </div>
@@ -134,13 +173,7 @@ function NotedContent() {
                 )}
             </div>
 
-            {editTarget && (
-                <NotedEditFocus
-                    noted={editTarget}
-                    onClose={() => setEditTarget(null)}
-                    onSaved={fetchNoted}
-                />
-            )}
+            {editTarget && <NotedEditFocus />}
         </>
     )
 }

@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import axios from "axios";
 
 export const useNotedStore = create(
     persist(
@@ -8,6 +9,18 @@ export const useNotedStore = create(
             searchQuery: "",
             filterType: "",
             editTarget: null,
+
+            fetchNoted: async () => {
+                try {
+                    const res = await axios.get("/api/noted");
+                    const data = res.data?.data;
+                    if (Array.isArray(data)) {
+                        set({ noted: data });
+                    }
+                } catch (err) {
+                    console.error("Gagal mengambil data catatan:", err);
+                }
+            },
 
             setNoted: (data) =>
                 set({ noted: Array.isArray(data) ? data : [] }),
@@ -52,7 +65,10 @@ export const useNotedStore = create(
                             (n.description && n.description.toLowerCase().includes(q)) ||
                             (n.type && n.type.toLowerCase().includes(q)) ||
                             (n.syarat && n.syarat.toLowerCase().includes(q)) ||
-                            (n.reward && n.reward.toLowerCase().includes(q))
+                            (n.reward && n.reward.toLowerCase().includes(q)) ||
+                            (n.brand && n.brand.toLowerCase().includes(q)) ||
+                            (n.company && n.company.toLowerCase().includes(q)) ||
+                            (n.expired && String(n.expired).toLowerCase().includes(q))
                     );
                 }
 
@@ -65,4 +81,3 @@ export const useNotedStore = create(
         }
     )
 );
-
