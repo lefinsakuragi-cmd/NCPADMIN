@@ -48,10 +48,12 @@ function NotedSidebar() {
         e.preventDefault()
 
         if (!title.trim()) return alert("Title wajib diisi")
+        if (!user?.id) return alert("Sesi user tidak ditemukan, silakan login ulang")
 
         setIsSaving(true)
         try {
             const payload = {
+                user_id: user.id,
                 title: title.trim(),
                 deskription: deskription.trim(),
                 type: type.trim() || null,
